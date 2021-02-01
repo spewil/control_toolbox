@@ -5,6 +5,13 @@ p = np.random.normal([-250, 0], [10, 10])
 px0 = p[0]
 py0 = p[1]
 print(p)
+'''
+Required data to set up the task
+- number of time points, discretization in time
+- cost at each time step
+-
+
+'''
 
 
 def polar_to_cartesian(coord):
@@ -42,8 +49,11 @@ def generate_APT_targets(dt):
             for c, t in zip(cartesian_coords, range(len(times)))]
 
 
-def generate_dynamics(dt, targets, tau, m, r, noise_mag, wv, wf):
+def visualize_cost_field():
+    pass
 
+
+def generate_dynamics(dt, targets, tau, m, r, noise_mag, wv, wf):
     T = 1
     times = np.linspace(0, T, int(T / dt))
 
