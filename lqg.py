@@ -8,12 +8,12 @@ from utils import plot
 """
 
 TODO
-- set up finite time nicely
-    - what are the constraints here?
-    - what checks are necessary?
-- do infinite horizon with truncation
-    - this should work online?
-    - is this goal-specific?
+- infinite time, single goal
+    - added perturbation over simulation
+- finite time (list of control laws)
+    - single goal
+    - list of goals (trajectory tracking)
+
 - make this work online?
     - what cases can respond to perturbations?
 - how to inferface with e.g. mujoco?
@@ -23,14 +23,6 @@ TODO
 
 questions
 - what does time look like here?
-
-"""
-"""
-
-types
-- finite time, single goal
-- finite time, trajectory
-- infinite time, single goal
 
 """
 
@@ -132,14 +124,12 @@ def compute_costs(dt, target, velocity_cost_amplitude, force_cost_amplitude,
         [0,  0, 0,  0,  force_cost_amplitude, 0,  0],\
         [0,  0, 0,  0,  0,  force_cost_amplitude, 0]])
 
-    Q_list = []
-    for i, t in enumerate(times):
-        Q_list.append((1 / (len(D_target) + 1)) * (D_target.T @ D_target))
+    Q = (1 / (len(D_target) + 1)) * (D_target.T @ D_target)
 
     # control cost u^TRu -- just a plain magnitude cost
     R = control_cost_magnitude * np.eye(2) / len(times)
 
-    return R, Q_list
+    return R, Q
 
 
 def backward_recurse(A, B, R, Q, S):
@@ -147,19 +137,20 @@ def backward_recurse(A, B, R, Q, S):
         B.T @ S @ A) + Q
 
 
-def compute_steady_state_cost_to_go(A, B, R, Q, S):
+def compute_steady_state_cost_to_go(A, B, R, Q):
     i = 0
     tol = 0.00001
+    old_S = Q
     while True:
         i += 1
         if i > 1000:
             logger.error("Exceeded steady stay computation recursion.")
             break
-        old_S = S
         S = backward_recurse(A, B, R, Q, old_S)
         if np.max(np.abs(old_S - S)) < tol:
             logger.info("Converged in {i} steps.", i=i)
             return S
+        old_S = S
 
 
 def plot_eigenvalues(matrix, color, figax=None):
@@ -174,15 +165,14 @@ def compute_control_law(A, B, R, Q, S):
     return -np.linalg.inv(R + B.T @ S @ B) @ (B.T @ S @ A)
 
 
-def backward_pass(A, B, R, Q_list):
-    S = Q_list[-1]
+def backward_pass(A, B, R, Q):
+    S = Q
     S_list = [S]
     L_list = []
-    for Q in Q_list[::-1]:
-        L = compute_control_law(A, B, R, Q, S)
-        S = backward_recurse(A, B, R, Q, S)
-        S_list.append(S)
-        L_list.append(L)
+    L = compute_control_law(A, B, R, Q, S)
+    S = backward_recurse(A, B, R, Q, S)
+    S_list.append(S)
+    L_list.append(L)
     L_list = L_list[::-1]
     S_list = S_list[::-1]
     return np.array(L_list), np.array(S_list)
@@ -224,13 +214,16 @@ if __name__ == '__main__':
 
     cost_params = {
         "dt": 0.005,
-        "control_cost_magnitude": 0.01,
-        "velocity_cost_amplitude": 0.01,
-        "force_cost_amplitude": 0.01,
-        "target": np.array([50, 50])
+        "control_cost_magnitude": 1,
+        "velocity_cost_amplitude": 0.0,
+        "force_cost_amplitude": 0.0,
+        "target": np.array([25, 50])
     }
 
-    num_movements = 10
+    num_movements = 25
+    num_steps = 500
+    state_space_x = 100
+    state_space_y = 100
 
     def plot_trajectory_pair(trajectories, ylabels, goal=None):
         fig, axes = plt.subplots(len(ylabels), 1, figsize=(10, 10))
@@ -243,24 +236,19 @@ if __name__ == '__main__':
                 ax.plot(trajectory.shape[0], goal[i], "or")
         return fig, axes
 
-    def compute_state_cost_to_go(S):
-        def f(x, S):
-            return x.T @ S[:2, :2] @ x
-
-        xaxis = np.linspace(0, 1, 100)
-        yaxis = np.linspace(0, 1, 100)
-        x = np.vstack([xaxis, yaxis])
-        return f(x, S)
-
     def run_infinite_time():
         A, B = compute_dynamics(**dynamics_params)
-        R, Q_list = compute_costs(**cost_params)
-        S = compute_steady_state_cost_to_go(A, B, R, Q_list[-1], Q_list[-1])
-        K = compute_control_law(A, B, R, Q_list[50], S)
+        R, Q = compute_costs(**cost_params)
+        S = compute_steady_state_cost_to_go(A, B, R, Q)
+        K = compute_control_law(A, B, R, Q, S)
         trajectories = []
         for i in range(num_movements):
+            x0 = np.array([
+                np.random.uniform(0, state_space_x),
+                np.random.uniform(0, state_space_y), 0, 0, 0, 0, 1
+            ]).reshape(-1, 1)
             states, controls = forward_pass(
-                x0, A, B, [K for _ in range(200)],
+                x0, A, B, [K for _ in range(num_steps)],
                 dynamics_params["state_noise_magnitude"],
                 dynamics_params["state_noise_covariance"])
             trajectories.append(states)
@@ -273,35 +261,24 @@ if __name__ == '__main__':
         #                                  ylabels=["x force", "y force"])
         return K, S, trajectories
 
-    def run_finite_time():
-        A, B = compute_dynamics(**dynamics_params)
-        R, Q_list = compute_costs(**cost_params)
-        trajectories = []
-        for i in range(num_movements):
-            L_list, S_list = backward_pass(A, B, R, Q_list)
-            states, controls = forward_pass(
-                x0, A, B, L_list, dynamics_params["state_noise_magnitude"],
-                dynamics_params["state_noise_covariance"])
-            trajectories.append(states)
-        trajectories = np.array(trajectories)
-
-        # fig, axes = plot_trajectory_pair(trajectories[:, :, :2],
-        #                                  ylabels=["x position", "y position"],
-        #                                  goal=cost_params["target"])
-        # fig, axes = plot_trajectory_pair(trajectories[:, :, 4:6],
-        #                                  ylabels=["x force", "y force"])
-        return L_list, S_list, trajectories
-
     K, S, infinite_trajectories = run_infinite_time()
 
-    def visualize_cost_field(S):
+    def visualize_cost_field(S, lims):
         """
         plot the cost over the state space for a given LQR problem
 
         """
+        def f(x, S):
+            return x.T @ S @ x
+
         fig, ax = plt.subplots(1, 1)
-        J = compute_state_cost_to_go(S)
-        im = ax.imshow(J, origin="lower")
+        n = lims[1] - lims[0]
+        J = np.zeros(shape=(n, n))
+        for i, x in enumerate(np.linspace(lims[0], lims[1], n)):
+            for j, y in enumerate(np.linspace(lims[0], lims[1], n)):
+                state = np.array([x, y, 0, 0, 0, 0, 1]).reshape(-1, 1)
+                J[i][j] = f(state, S)
+        im = ax.imshow(J.T, origin="lower")
         fig.set_frameon(False)
         fig.colorbar(im)
         return fig, ax
@@ -328,17 +305,39 @@ if __name__ == '__main__':
         fig.colorbar(im)
         return fig, ax
 
+    def visualize_control_field(K, lims):
+        """
+        plot the cost over the state space for a given LQR problem
+
+        """
+        def f(x, K):
+            return -K @ x
+
+        fig, ax = plt.subplots(1, 1)
+        n = (lims[1] - lims[0]) // 2
+        u = np.zeros(shape=(n, n, 2))
+        xx = np.linspace(lims[0], lims[1], n)
+        yy = np.linspace(lims[0], lims[1], n)
+        xg, yg = np.meshgrid(xx, yy)
+        for i, x in enumerate(xx):
+            for j, y in enumerate(yy):
+                state = np.array([x, y, 0, 0, 0, 0, 1]).reshape(-1, 1)
+                u[i][j] = f(state, S)[:2].reshape(-1)
+        ax.quiver(yy, xx, u[:, :, 0].T, u[:, :, 1].T)
+        return fig, ax
+
     # figax = plot_eigenvalues(K.T @ K, color="k")
-    # fig, ax = plt.subplots(1, 1)
-    # for L in L_list:
-    #     plot_eigenvalues(L.T @ L, color="b", figax=(fig, ax))
 
-    figax = visualize_cost_field(S)
-    figax[1].set_xlim([0, 100])
-    figax[1].set_ylim([0, 100])
-    for it in infinite_trajectories:
-        figax[1].plot(it[:, 0], it[:, 1])
-
+    figax = visualize_cost_field(S, [0, 100])
+    figax[1].plot(cost_params["target"][0], cost_params["target"][1], "sr")
+    # figax = visualize_control_law(S)
     # figax = visualize_control_law(K)
-
+    fig, ax = visualize_control_field(K, [0, 100])
+    for it in infinite_trajectories:
+        ax.plot(it[0, 0], it[0, 1], "og")
+        ax.plot(it[-1, 0], it[-1, 1], "or")
+        ax.plot(it[:, 0], it[:, 1], "k--", alpha=0.5)
+        figax[1].plot(it[0, 0], it[0, 1], "og")
+        figax[1].plot(it[-1, 0], it[-1, 1], "or")
+        figax[1].plot(it[:, 0], it[:, 1], "k--", alpha=0.5)
     plt.show()
