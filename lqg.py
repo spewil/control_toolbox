@@ -1,134 +1,110 @@
+import sys
 import numpy as np
+import matplotlib
+matplotlib.use("TkAgg")
 from matplotlib import pyplot as plt
+from loguru import logger
+from utils import plot
+"""
 
-p = np.random.normal([-250, 0], [10, 10])
-px0 = p[0]
-py0 = p[1]
-print(p)
-'''
-Required data to set up the task
-- number of time points, discretization in time
-- cost at each time step
--
+TODO
+- set up finite time nicely
+    - what are the constraints here?
+    - what checks are necessary?
+- do infinite horizon with truncation
+    - this should work online?
+    - is this goal-specific?
+- make this work online?
+    - what cases can respond to perturbations?
+- how to inferface with e.g. mujoco?
 
-'''
+"""
+"""
 
+questions
+- what does time look like here?
 
-def polar_to_cartesian(coord):
-    return [coord[0] * np.cos(coord[1]), coord[0] * np.sin(coord[1])]
+"""
+"""
 
+types
+- finite time, single goal
+- finite time, trajectory
+- infinite time, single goal
 
-def cartesian_to_polar(coord):
-    output = [0, 0]
-    output[0] = np.sqrt(coord[0]**2 + coord[1]**2)
-    if coord[1] >= 0:
-        output[1] = np.arccos(coord[0] / output[0])
-    else:
-        output[1] = -np.arccos(coord[0] / output[0])
-    return output
+"""
 
-
-def sample_state_noise(x, noise_mag, Omega):
-    return noise_mag * np.random.multivariate_normal(np.zeros(x.shape[0]),
-                                                     Omega).reshape(-1, 1)
-
-
-def generate_APT_targets(dt):
-    T = 1  # sec
-    times = np.linspace(0, T, int(T / dt))
-    # target point for every timestep
-    # APT task -- polar coordinates to cartesian
-    # radius and angle, [r, theta]
-    radius = 250
-    angles = np.linspace(np.pi, 0, len(times), endpoint=True)
-    radii = np.ones(len(angles)) * radius
-    polar_coords = zip(radii, angles)
-    cartesian_coords = [polar_to_cartesian(p) for p in polar_coords]
-    # target: (x,y,timestep)
-    return [(c[0], c[1], t)
-            for c, t in zip(cartesian_coords, range(len(times)))]
+fmt = "{time} - {name} - {level} - {message}"
+logger.add("debug.log", level="DEBUG", format=fmt)
+logger.add(sys.stderr, level="ERROR", format=fmt)
 
 
-def visualize_cost_field():
-    pass
+def sample_state_noise(state_dim, state_noise_magnitude,
+                       state_noise_covariance):
+    """
+    Sample a Gaussian state noise vector
+    Args:
+        x: state needed for the state_dimension
+        noise_mag: amplitude of the gaussian
+        Omega: covariance
+
+    Returns:
+        Sample from a centered, multivariate Gaussian.
+
+    Raises:
+        
+    Notes:
+        We could handle the random seed more carefully here?
+
+    """
+    return state_noise_magnitude * np.random.default_rng().multivariate_normal(
+        np.zeros(state_dim), state_noise_covariance).reshape(-1, 1)
 
 
-def generate_dynamics(dt, targets, tau, m, r, noise_mag, wv, wf):
+def compute_dynamics(dt, mass, force_time_constant, state_noise_magnitude,
+                     state_dim, state_noise_covariance):
+    """
+    Args:
+        dt: 
+        target: 
+        tau: 
+        m: 
+        r: 
+        noise_mag: 
+        wv: 
+        wf: 
+   
+    Returns:
+        This is a description of what is returned.
+
+    Raises:
+        
+
+    """
+
     T = 1
     times = np.linspace(0, T, int(T / dt))
 
-    #     endpoint = targets[-1][:-1] # x and y coords
-    #     print("start: ",targets[0][:-1])
-    #     print("end: ",targets[-1][:-1])
-
-    # initial conditions
-    px0 = targets[0][0]
-    py0 = targets[0][1]
-    # random start
-    # p = np.random.normal([targets[0][0],targets[0][1]], [10,10])
-    # if p[1] < 0:
-    # p[1] = -p[1]
-    vx0 = 0.0
-    vy0 = 0.0
-    fx0 = -10.0
-    fy0 = 0.0
-    x = np.array([px0, py0, vx0, vy0, fx0, fy0, 1]).reshape(-1, 1)
-
     # dynamics
-    A = np.eye(x.shape[0])
+    A = np.eye(state_dim)
     A[0][2] = dt
     A[1][3] = dt
-    A[2][4] = dt / m
-    A[3][5] = dt / m
-    A[4][4] = np.exp(-dt / tau)
-    A[5][5] = np.exp(-dt / tau)
+    A[2][4] = dt / mass
+    A[3][5] = dt / mass
+    A[4][4] = np.exp(-dt / force_time_constant)
+    A[5][5] = np.exp(-dt / force_time_constant)
+    """
+    A: 
+    | 1  0  dt 0  0    0   0
+    | 0  1  0  dt 0    0   0
+    | 0  0  1  0  dt/m 0   0
+    | 0  0  0  1  0   dt/m 0
+    | 0  0  0  0  e^-x 0   0
+    | 0  0  0  0  0   e^-x 0
+    | 0  0  0  0  0   0    1
+    """
 
-    # dynamics noise
-    Omega = np.eye(x.shape[0])
-
-    ## task error
-    # via points --> px, py - tx, ty
-    #     D_targets = [np.array([
-    #                 [-1,  0, 0, 0, 0, 0, target[0]],\
-    #                 [0, -1, 0, 0, 0, 0, target[1]]])\
-    #               for target in targets\
-    #              ]
-    #     # end point
-    # zero velocity
-    wvs = np.append(np.zeros(len(targets) // 2),
-                    np.linspace(0, wv,
-                                len(targets) // 2))
-    wfs = np.append(np.zeros(len(targets) // 2),
-                    np.linspace(0, wv,
-                                len(targets) // 2))
-    D_targets = [np.array([
-        [-1, 0, 0,  0,  0,  0,  target[0]],\
-        [0, -1, 0,  0,  0,  0,  target[1]],\
-        [0,  0, wv, 0,  0,  0,  0],\
-        [0,  0, 0,  wv, 0,  0,  0],\
-        [0,  0, 0,  0,  wf, 0,  0],\
-        [0,  0, 0,  0,  0,  wf, 0]])\
-        for wv,wf,target in zip(wvs,wfs,targets)\
-    ]
-    Q_list = []
-    ttimes = [t[2] for t in targets]
-    #     print("num targets: ",len(ttimes))
-    #     print("num timesteps: ",len(times))
-    for i, t in enumerate(times):
-        # add constraints to list of zero matrices
-        #         if i == len(times)-1:
-        #             print(np.max(D_end))
-        #             Q_list.append((1/(len(D_targets)+1))*(D_end.T@D_end))
-        if i in ttimes:
-            # (add targets at specified times)
-            Q_list.append(
-                (1 / (len(D_targets) + 1)) * (D_targets[i].T @ D_targets[i]))
-        else:
-            # otherwise it's zeros for everything
-            print("zeros")
-            Q_list.append(np.zeros((x.shape[0], x.shape[0])))
-    # control acts on force
-    # dynamic
+    # control acts on force only
     B = np.array(\
         [[0,0],\
          [0,0],\
@@ -137,10 +113,33 @@ def generate_dynamics(dt, targets, tau, m, r, noise_mag, wv, wf):
          [1,0],\
          [0,1],\
          [0,0]])
-    # cost
-    R = r * np.eye(2) / len(times)
 
-    return x, A, B, R, Q_list, noise_mag, Omega
+    return A, B
+
+
+def compute_costs(dt, target, velocity_cost_amplitude, force_cost_amplitude,
+                  control_cost_magnitude):
+
+    T = 1
+    times = np.linspace(0, T, int(T / dt))
+
+    # state cost x^TQx = (x^TD^T)(Dx)
+    D_target = np.array([
+        [-1, 0, 0,  0,  0,  0, target[0]],\
+        [0, -1, 0,  0,  0,  0, target[1]],\
+        [0,  0, velocity_cost_amplitude, 0,  0,  0,  0],\
+        [0,  0, 0,  velocity_cost_amplitude, 0,  0,  0],\
+        [0,  0, 0,  0,  force_cost_amplitude, 0,  0],\
+        [0,  0, 0,  0,  0,  force_cost_amplitude, 0]])
+
+    Q_list = []
+    for i, t in enumerate(times):
+        Q_list.append((1 / (len(D_target) + 1)) * (D_target.T @ D_target))
+
+    # control cost u^TRu -- just a plain magnitude cost
+    R = control_cost_magnitude * np.eye(2) / len(times)
+
+    return R, Q_list
 
 
 def backward_recurse(A, B, R, Q, S):
@@ -148,257 +147,198 @@ def backward_recurse(A, B, R, Q, S):
         B.T @ S @ A) + Q
 
 
-def compute_law(A, B, R, Q, S):
+def compute_steady_state_cost_to_go(A, B, R, Q, S):
+    i = 0
+    tol = 0.00001
+    while True:
+        i += 1
+        if i > 1000:
+            logger.error("Exceeded steady stay computation recursion.")
+            break
+        old_S = S
+        S = backward_recurse(A, B, R, Q, old_S)
+        if np.max(np.abs(old_S - S)) < tol:
+            logger.info("Converged in {i} steps.", i=i)
+            return S
+
+
+def plot_eigenvalues(matrix, color, figax=None):
+    if figax is None:
+        figax = plt.subplots(1, 1)
+    vals, _ = np.linalg.eig(matrix)
+    figax[1].plot(np.real(vals), "o" + color)
+    return figax
+
+
+def compute_control_law(A, B, R, Q, S):
     return -np.linalg.inv(R + B.T @ S @ B) @ (B.T @ S @ A)
 
 
-def compute_control(dt, x, A, B, R, Q_list, noise_mag, Omega):
-    T = 1  # sec
-    times = np.linspace(0, T, int(T / dt))
-
-    # compute control law
-    Q = Q_list[-1]
+def backward_pass(A, B, R, Q_list):
     S = Q_list[-1]
     S_list = [S]
     L_list = []
-    for Q in Q_list[::-1]:  # no control at last time
-        L = compute_law(A, B, R, Q, S)
+    for Q in Q_list[::-1]:
+        L = compute_control_law(A, B, R, Q, S)
         S = backward_recurse(A, B, R, Q, S)
         S_list.append(S)
         L_list.append(L)
     L_list = L_list[::-1]
     S_list = S_list[::-1]
-    #     print(f"{len(S_list)} timesteps | {len(L_list)} control inputs")
+    return np.array(L_list), np.array(S_list)
 
-    # main loop
-    x_list = [x]
+
+def advance_dynamic(x, A, B, K, state_noise):
+    u = K @ x
+    x = A @ x + B @ u + state_noise
+    return x, u
+
+
+def forward_pass(x0, A, B, L_list, state_noise_magnitude,
+                 state_noise_covariance):
+    x_list = [x0]
     u_list = []
-    for i, t in enumerate(times):
-        if i != len(times) - 1:
-            # compute control
-            u = L_list[i] @ x
-            u_list.append(u)
-        # run dynamic
-        x = A @ x + B @ u + sample_state_noise(x, noise_mag, Omega)
+    num_iterations = len(L_list)
+    for i in range(num_iterations):
+        state_noise = sample_state_noise(x_list[i].shape[0],
+                                         state_noise_magnitude,
+                                         state_noise_covariance)
+        x, u = advance_dynamic(x_list[i], A, B, L_list[i], state_noise)
         x_list.append(x.reshape(-1, 1))
-    return x_list, u_list, L_list
+        if i != num_iterations - 1:
+            u_list.append(u.reshape(-1, 1))
+    return np.array(x_list)[:, :, 0], np.array(u_list)[:, :, 0]
 
 
-def sample_APT_trajectories(num, noise_mag=0.01):
+if __name__ == '__main__':
+    x0 = np.array([0, 0, 0, 0, 0, 0, 1]).reshape(-1, 1)
+    state_dim = 7
+    dynamics_params = {
+        "state_dim": state_dim,
+        "dt": 0.005,
+        "force_time_constant": 0.040,  # 40ms, exponential filter constant
+        "mass": 1,
+        "state_noise_magnitude": 0.01,
+        "state_noise_covariance": np.eye(state_dim)
+    }
 
-    trajectories = []
-    control_trajectories = []
-    control_law_trajectories = []
+    cost_params = {
+        "dt": 0.005,
+        "control_cost_magnitude": 0.01,
+        "velocity_cost_amplitude": 0.01,
+        "force_cost_amplitude": 0.01,
+        "target": np.array([50, 50])
+    }
 
-    # timesteps
-    dt = 0.005  # sec
-    T = .8  # sec
-    times = np.linspace(0, T, int(T / dt))
+    num_movements = 10
 
-    # hyperparams
-    tau = 0.040  # 40ms, exponential filter constant
-    m = .0005
-    r = 0.002
-    noise_mag = noise_mag
-    wv = .01
-    wf = 0
+    def plot_trajectory_pair(trajectories, ylabels, goal=None):
+        fig, axes = plt.subplots(len(ylabels), 1, figsize=(10, 10))
+        for i, ax in enumerate(axes):
+            for trajectory in trajectories:
+                ax.plot(trajectory[:, i])
+                ax.set_xlabel("Time")
+                ax.set_ylabel(ylabels[i])
+            if goal is not None:
+                ax.plot(trajectory.shape[0], goal[i], "or")
+        return fig, axes
 
-    for i in range(num):
-        targets = generate_APT_targets(dt)
-        x, A, B, R, Q_list, noise_mag, Omega = generate_dynamics(
-            dt, targets, tau, m, r, noise_mag, wv, wf)
-        x_list, u_list, L_list = compute_control(dt, x, A, B, R, Q_list,
-                                                 noise_mag, Omega)
-        trajectories.append(np.array(x_list).T[0])  ## HACK!!!
-        control_trajectories.append(u_list)
-        control_law_trajectories.append(L_list)
+    def compute_state_cost_to_go(S):
+        def f(x, S):
+            return x.T @ S[:2, :2] @ x
 
-    return trajectories, control_trajectories, control_law_trajectories
+        xaxis = np.linspace(0, 1, 100)
+        yaxis = np.linspace(0, 1, 100)
+        x = np.vstack([xaxis, yaxis])
+        return f(x, S)
 
+    def run_infinite_time():
+        A, B = compute_dynamics(**dynamics_params)
+        R, Q_list = compute_costs(**cost_params)
+        S = compute_steady_state_cost_to_go(A, B, R, Q_list[-1], Q_list[-1])
+        K = compute_control_law(A, B, R, Q_list[50], S)
+        trajectories = []
+        for i in range(num_movements):
+            states, controls = forward_pass(
+                x0, A, B, [K for _ in range(200)],
+                dynamics_params["state_noise_magnitude"],
+                dynamics_params["state_noise_covariance"])
+            trajectories.append(states)
+        trajectories = np.array(trajectories)
 
-def generate_arc(num_points, radius=250, start=0, end=180, polar=False):
-    start_angle_rad = (np.pi / 180) * start
-    end_angle_rad = (np.pi / 180) * end
-    angles = np.linspace(end_angle_rad,
-                         start_angle_rad,
-                         num_points,
-                         endpoint=True)
-    radii = np.ones(num_points) * radius
-    polar_coords = np.array(list(zip(radii, angles)))
-    if polar:
-        return polar_coords
-    else:
-        cartesian_coords = np.array(
-            [polar_to_cartesian(p) for p in polar_coords])
-        return cartesian_coords
+        # fig, axes = plot_trajectory_pair(trajectories[:, :, :2],
+        #                                  ylabels=["x position", "y position"],
+        #                                  goal=cost_params["target"])
+        # fig, axes = plot_trajectory_pair(trajectories[:, :, 4:6],
+        #                                  ylabels=["x force", "y force"])
+        return K, S, trajectories
 
+    def run_finite_time():
+        A, B = compute_dynamics(**dynamics_params)
+        R, Q_list = compute_costs(**cost_params)
+        trajectories = []
+        for i in range(num_movements):
+            L_list, S_list = backward_pass(A, B, R, Q_list)
+            states, controls = forward_pass(
+                x0, A, B, L_list, dynamics_params["state_noise_magnitude"],
+                dynamics_params["state_noise_covariance"])
+            trajectories.append(states)
+        trajectories = np.array(trajectories)
 
-def polar_to_cartesian(coord):
-    return [coord[0] * np.cos(coord[1]), coord[0] * np.sin(coord[1])]
+        # fig, axes = plot_trajectory_pair(trajectories[:, :, :2],
+        #                                  ylabels=["x position", "y position"],
+        #                                  goal=cost_params["target"])
+        # fig, axes = plot_trajectory_pair(trajectories[:, :, 4:6],
+        #                                  ylabels=["x force", "y force"])
+        return L_list, S_list, trajectories
 
+    K, S, infinite_trajectories = run_infinite_time()
 
-def cartesian_to_polar(coord):
-    output = [0, 0]
-    output[0] = np.sqrt(coord[0]**2 + coord[1]**2)
-    # change behavior depending on quadrant
-    output[1] = np.arccos(coord[0] / output[0])
-    if coord[1] >= 0:
-        output[1] = np.arccos(coord[0] / output[0])
-    else:
-        if coord[0] >= 0:
-            output[1] = -np.arccos(coord[0] / output[0])
-        else:
-            output[1] = np.pi + np.arccos(-coord[0] / output[0])
-    return output
+    def visualize_cost_field(S):
+        """
+        plot the cost over the state space for a given LQR problem
 
+        """
+        fig, ax = plt.subplots(1, 1)
+        J = compute_state_cost_to_go(S)
+        im = ax.imshow(J, origin="lower")
+        fig.set_frameon(False)
+        fig.colorbar(im)
+        return fig, ax
 
-def radians(degrees):
-    return (np.pi / 180) * degrees
+    def visualize_control_law(K):
+        """
+        plot the cost over the state space for a given LQR problem
 
+        """
+        fig, ax = plt.subplots(1, 1)
+        im = ax.imshow(K, origin="upper")
+        # Major ticks
+        ax.set_xticks(np.arange(0, K.shape[1], 1))
+        ax.set_yticks(np.arange(0, K.shape[0], 1))
+        # Labels for major ticks
+        ax.set_xticklabels(np.arange(1, K.shape[1] + 1, 1))
+        ax.set_yticklabels(np.arange(1, K.shape[0] + 1, 1))
+        # Minor ticks
+        ax.set_xticks(np.arange(-.5, K.shape[1], 1), minor=True)
+        ax.set_yticks(np.arange(-.5, K.shape[0], 1), minor=True)
+        # Gridlines based on minor ticks
+        ax.grid(which='minor', color='w', linestyle='-', linewidth=2)
+        fig.set_frameon(False)
+        fig.colorbar(im)
+        return fig, ax
 
-def make_polar_plot():
-    fig = plt.figure(figsize=(18, 18))
-    ax = fig.add_subplot(projection="polar")
-    ax.set_yticks([])
-    #     ax.set_xlim([np.pi+np.pi/7,-np.pi/7])
-    ax.set_ylim([0, 420])
-    ax.set_xticks([0, np.pi])
-    ax.set_xticklabels(["$0^{\circ}$", "$180^{\circ}$"], FontSize=18)
-    ax.spines['polar'].set_visible(False)
-    return fig, ax
+    # figax = plot_eigenvalues(K.T @ K, color="k")
+    # fig, ax = plt.subplots(1, 1)
+    # for L in L_list:
+    #     plot_eigenvalues(L.T @ L, color="b", figax=(fig, ax))
 
+    figax = visualize_cost_field(S)
+    figax[1].set_xlim([0, 100])
+    figax[1].set_ylim([0, 100])
+    for it in infinite_trajectories:
+        figax[1].plot(it[:, 0], it[:, 1])
 
-trajectories, u_list, _ = sample_APT_trajectories(10)
-trajectories = np.array(trajectories)
+    # figax = visualize_control_law(K)
 
-polar_trajectories = []
-for t in trajectories:
-    points = []
-    for x in t.T:
-        r, theta = cartesian_to_polar([x[0], x[1]])
-        points.append([theta, r])
-    polar_trajectories.append(np.stack(points).T)
-
-fig, ax = make_polar_plot()
-for u, pt in zip(u_list, polar_trajectories):
-    plt.plot(pt[0], pt[1], alpha=0.1)
-
-mean_curve = np.mean(np.array(polar_trajectories), axis=0)
-print(mean_curve.shape)
-std = np.std(np.array(polar_trajectories), axis=0)[1]
-print(std.shape)
-ax.fill_between(mean_curve[0],
-                mean_curve[1] + std,
-                mean_curve[1] - std,
-                alpha=.5)
-ax.plot(mean_curve[0], mean_curve[1], 'b', zorder=100)
-arc = generate_arc(200, polar=True).T
-ax.plot(arc[1], arc[0], "--k", zorder=100)
-
-plt.figure()
-for uvec, pvec in zip(u, trajectories[-1].T):
-    plt.arrow(pvec[0], pvec[1], uvec[0][0], uvec[1][0])
-    plt.plot(pvec[0], pvec[1], 'o', markerSize=0)
-
-# plt.plot(std)
-# print(std)
-
-# trajectories, _, _ = sample_APT_trajectories(10, noise_mag=0.0075)
-# trajectories = np.array(trajectories)
-
-# print(trajectories.shape)
-
-# polar_trajectories = []
-# for t in trajectories:
-#     points = []
-#     for x in t.T:
-#         r, theta = cartesian_to_polar([x[0], x[1]])
-#         points.append([theta, r])
-#     polar_trajectories.append(np.stack(points).T)
-
-# print(np.array(polar_trajectories).shape)
-# fig, ax = make_polar_plot()
-# for pt in polar_trajectories:
-#     ax.plot(pt[0], pt[1])
-# ax.axis('off')
-# ax.plot(arc[1], arc[0], "--k", zorder=100)
-
-# trajectories, _, _ = sample_APT_trajectories(10, noise_mag=0.025)
-# trajectories = np.array(trajectories)
-
-# print(trajectories.shape)
-
-# polar_trajectories = []
-# for t in trajectories:
-#     points = []
-#     for x in t.T:
-#         r, theta = cartesian_to_polar([x[0], x[1]])
-#         points.append([theta, r])
-#     polar_trajectories.append(np.stack(points).T)
-
-# print(np.array(polar_trajectories).shape)
-# fig, ax = make_polar_plot()
-# for pt in polar_trajectories:
-#     ax.plot(pt[0], pt[1])
-# ax.axis('off')
-# ax.plot(arc[1], arc[0], "--k", zorder=100)
-
-# plt.plot(std)
-# print(std)
-
-# plt.figure(figsize=(18, 9))
-# plt.xlabel("normalized time", FontSize=18)
-# plt.ylabel("control signal", FontSize=18)
-# plt.plot([u[0] for u in u_list[1:]], LineWidth=4)
-# plt.plot([u[1] for u in u_list[1:]], LineWidth=4)
-# plt.gca().set_xticks([0, 100, 200])
-# plt.gca().set_xticklabels([0, 100, 200], FontSize=16)
-# plt.gca().set_yticks([-100, 0, 100])
-# plt.gca().set_yticklabels([-100, 0, 100], FontSize=16)
-# plt.gca().spines['right'].set_visible(False)
-# plt.gca().spines['top'].set_visible(False)
-# plt.gca().spines['left'].set_visible(False)
-# plt.gca().spines['bottom'].set_visible(False)
-# # plt.figure()
-# # plt.title("control signal")
-# # L_eigs = []
-# # for L in L_list:
-# #     L_eigs.append(np.sqrt(np.linalg.eig(L.T@L)[0][0]))
-# # plt.plot(L_eigs)
-# # plt.title("eigenvalues")
-
-# ## velocity colored
-
-# from matplotlib import cm
-# fig = plt.figure(figsize=(15, 10))
-# ax = fig.add_subplot(1, 1, 1)
-# ax.axis('square')
-# ax.set_xlim(-275, 400)
-# ax.set_ylim(-10, 400)
-
-# x_list = trajectories[0]
-# print(np.array(x_list).shape)
-# targets = generate_APT_targets(0.005)
-
-# posx = [x[0] for x in x_list]
-# posy = [x[1] for x in x_list]
-# vel_mag = [np.sqrt(x[2]**2 + x[3]**2)[0] for x in x_list]
-
-# steps = 10
-# c = np.asarray(vel_mag)
-# c -= np.min(c)
-# c = c / np.max(c)
-# it = 0
-
-# while it < c.size - steps:
-#     x_segm = posx[it:it + steps + 1]
-#     y_segm = posy[it:it + steps + 1]
-#     c_segm = plt.cm.jet(c[it + steps // 2])
-#     ax.plot(x_segm, y_segm, c=c_segm)
-#     it += steps
-
-# ax.add_artist(plt.Circle((targets[0][0], targets[0][1]), 5, color='g'))
-# for i, target in enumerate(targets[1:]):
-#     ax.add_artist(
-#         plt.Circle((target[0], target[1]), 0.5, color='k', alpha=0.25))
-# ax.add_artist(plt.Circle((targets[-1][0], targets[-1][1]), 5, color='r'))
+    plt.show()

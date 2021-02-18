@@ -1,0 +1,7 @@
+{
+    "python.pythonPath": "/Users/spencerw/miniconda3/envs/data/bin/python",
+    "jupyter.jupyterServerType": "local",
+    "python.formatting.provider": "yapf",
+    "python.linting.enabled": false,
+    "python.linting.flake8Enabled": true
+}
