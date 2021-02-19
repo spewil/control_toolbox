@@ -8,21 +8,40 @@ from utils import plot
 """
 
 TODO
-X - infinite time, single goal
-    - added perturbation over simulation
-- finite time (list of control laws)
-    - single goal
-    - list of goals (trajectory tracking)
+- TIDY this up, into package and scripts
+- prove that K is invariant to goal
+    - just feed back the task error to reach a set point!
+        - the cost want's the state, whatever it is, to go to zero.
+    - K, S, etc is translation invariant to the goal state
+    - to build this translation into the state/dynamics, we augment the state/cost with the target
+        - this just computes the error from that state internally
+    - write about this:
+        - L is linear in state, we can apply linear operations to it?
+        - S is quadratic in state, but we can also linearly transform it?
+- multiple targets?
+    - this doesn't work by adding another target, doesn't converge
+    - would need to decide between targets?
+    - are value functions additive?
+- make time, force, etc into reasonable units
 
-- make this work online?
-    - what cases can respond to perturbations?
-- how to inferface with e.g. mujoco?
+Goals
+- finish cleaning this up
+    - X infinite horizon lqr
+    - "" "" with multiplicative noise
+    - model corruption
+    - model adaptation gradient
+        - compute gradient? diagonalizable?
+    - write up discussion
+        - composing LQR policies
+            - averaging
+            - in what case is composition useful?
 
-"""
-"""
-
-questions
-- what does time look like here?
+- analyze andy's data
+    - draw specific plots i want
+    - behavioral trajectories
+    - EMG features -- low-dimensional trajectories
+    - comparisons within sessions
+    - comparisons across sessions
 
 """
 
@@ -71,7 +90,7 @@ class LQR():
         times = np.linspace(0, T, int(T / dt))
 
         # dynamics
-        A = np.eye(state_dim) * 0.9
+        A = np.eye(state_dim)
         A[0][2] = dt
         A[1][3] = dt
         A[2][4] = dt / mass
@@ -90,7 +109,7 @@ class LQR():
 
         # control acts on force only
         B = np.eye(state_dim)
-        B = B[:, -2:]
+        B = B[:, 4:6]
 
         return A, B
 
@@ -106,18 +125,17 @@ class LQR():
         times = np.linspace(0, T, int(T / dt))
 
         # state cost x^TQx = (x^TD^T)(Dx)
-        D_target = np.array([
-            [-1, 0, 0,  0,  0,  0],\
-            [0, -1, 0,  0,  0,  0],\
-            [0,  0, velocity_cost_amplitude, 0,  0,  0],\
-            [0,  0, 0,  velocity_cost_amplitude, 0,  0],\
-            [0,  0, 0,  0,  force_cost_amplitude, 0],\
-            [0,  0, 0,  0,  0,  force_cost_amplitude]])
+        D_target = np.array([[-1, 0, 0, 0, 0, 0, target[0], 0],\
+                             [ 0,-1, 0, 0, 0, 0, 0, target[1]]])
+        # [0,  0, velocity_cost_amplitude, 0,  0,  0, 0,0],\
+        # [0,  0, 0,  velocity_cost_amplitude, 0,  0, 0,0],\
+        # [0,  0, 0,  0,  force_cost_amplitude, 0, 0  ,0],\
+        # [0,  0, 0,  0,  0,  force_cost_amplitude, 0,0]])
 
-        Q = (1 / (len(D_target) + 1)) * (D_target.T @ D_target)
+        Q = D_target.T @ D_target
 
         # control cost u^TRu -- just a plain magnitude cost
-        R = control_cost_magnitude * np.eye(2) / len(times)
+        R = control_cost_magnitude * np.eye(2)
 
         return R, Q
 
@@ -131,8 +149,10 @@ class LQR():
         old_S = Q
         while True:
             i += 1
-            if i > 1000:
-                logger.error("Exceeded steady stay computation recursion.")
+            if i > 5000:
+                logger.error(
+                    "Exceeded maximum number of steady state computation iterations."
+                )
                 break
             S = self.backward_recurse(old_S)
             if np.max(np.abs(old_S - S)) < tol:
@@ -152,13 +172,11 @@ class LQR():
         A = self.A
         B = self.B
         R = self.R
-        Q = self.Q
         S = self.S
         return -np.linalg.inv(R + B.T @ S @ B) @ (B.T @ S @ A)
 
     def advance_dynamic(self, x, state_noise):
-        u = self.K @ (x - np.array(
-            [self.target[0], self.target[1], 0, 0, 0, 0]).reshape(-1, 1))
+        u = self.K @ x
         x = self.A @ x + self.B @ u + state_noise
         return x, u
 
@@ -256,136 +274,176 @@ def visualize_control_law(K):
     return fig, ax
 
 
-def visualize_cost_field(S, lims):
+def visualize_cost_field(S, lims=[-500, 500], ax=None):
     """
     plot the cost over the state space for a given LQR problem
 
     """
     def f(x, S):
-        return x.T @ S[:2, :2] @ x
+        return x.T @ S @ x
 
-    fig, ax = plt.subplots(1, 1)
+    if ax is None:
+        fig, ax = plt.subplots(1, 1)
     n = lims[1] - lims[0]
     J = np.zeros(shape=(n, n))
     for i, x in enumerate(np.linspace(lims[0], lims[1], n)):
         for j, y in enumerate(np.linspace(lims[0], lims[1], n)):
-            state = -np.array(target).reshape(-1, 1) + np.array(
-                [x, y]).reshape(-1, 1)
+            state = np.array([x, y, 0, 0, 0, 0, 1, 1]).reshape(-1, 1)
             J[i][j] = f(state, S)
     im = ax.imshow(J.T,
                    origin="lower",
                    extent=[lims[0], lims[1], lims[0], lims[1]])
+    if target is not None:
+        ax.plot(target[0], target[1], "*w", markerSize=20)
     fig.set_frameon(False)
     fig.colorbar(im)
-    return fig, ax
+    return ax
 
 
-def visualize_control_field(K, lims):
+def visualize_control_field(K, lims=[-500, 500], ax=None):
     """
     plot the cost over the state space for a given LQR problem
 
     """
     def f(x, K):
-        return -K[:, :2] @ x
+        return K @ x
 
-    fig, ax = plt.subplots(1, 1)
-    n = (lims[1] - lims[0]) // 10
+    if ax is None:
+        fig, ax = plt.subplots(1, 1)
+    n = (lims[1] - lims[0]) // 50
     u = np.zeros(shape=(n, n, 2))
     xx = np.linspace(lims[0], lims[1], n)
     yy = np.linspace(lims[0], lims[1], n)
     xg, yg = np.meshgrid(xx, yy)
     for i, x in enumerate(xx):
         for j, y in enumerate(yy):
-            state = -np.array(target).reshape(-1, 1) + np.array(
-                [x, y]).reshape(-1, 1)
+            state = np.array([x, y, 0, 0, 0, 0, 1, 1]).reshape(-1, 1)
             u[i][j] = f(state, K)[:2].reshape(-1)
     ax.quiver(yy, xx, u[:, :, 0].T, u[:, :, 1].T)
-    return fig, ax
+    if target is not None:
+        ax.plot(target[0], target[1], "*w", markerSize=20)
+    return ax
 
 
-def plot_eigenvalues(matrix):
+def plot_eigenvalues(matrix, type):
     fig, ax = plt.subplots(1, 1)
     vals, vecs = np.linalg.eig(matrix)
     poles = np.vstack([np.real(vals), np.imag(vals)]).T
-    print(poles)
-    r = np.max(poles) + 0.2
-    ax.set_xlim([-r, r])
-    ax.set_ylim([-r, r])
-    cc = plt.Circle((0.0, 0.0), 1.0, alpha=0.1)
-    ax.set_aspect(1)
-    ax.add_artist(cc)
-    for p in poles:
-        ax.arrow(0,
-                 0,
-                 p[0],
-                 p[1],
-                 color='k',
-                 width=0.01,
-                 head_length=0.075,
-                 head_width=0.1)
+    if type == "arrow":
+        r = np.max(poles) + 0.2
+        ax.set_xlim([-r, r])
+        ax.set_ylim([-r, r])
+        cc = plt.Circle((0.0, 0.0), 1.0, alpha=0.1)
+        ax.set_aspect(1)
+        ax.add_artist(cc)
+        for p in poles:
+            ax.arrow(0,
+                     0,
+                     p[0],
+                     p[1],
+                     color='k',
+                     width=0.01,
+                     head_length=0.075,
+                     head_width=0.1)
+    elif type == "bar":
+        ax.bar(range(1, poles.shape[0] + 1),
+               poles[:, 0],
+               color="g",
+               label="real")
+        ax.bar(range(1, poles.shape[0] + 1),
+               poles[:, 1],
+               color="y",
+               label="imaginary")
+        plt.plot([1, poles.shape[0]], [1, 1], "k--")
+        ax.legend(loc="lower center")
+
+
+def sample_trajectories(lqr, num_steps, lims=[-500, 500], perturbation=None):
+    trajectories = []
+    for i in range(num_movements):
+        x0 = np.array([
+            np.random.uniform(lims[0] // 2, lims[1] // 2),
+            np.random.uniform(lims[0] // 2, lims[1] // 2), 0, 0, 0, 0, 1, 1
+        ]).reshape(-1, 1)
+        states, controls = lqr.sample_trajectory(x0,
+                                                 num_steps,
+                                                 perturbation=perturbation)
+        trajectories.append(states)
+    return np.array(trajectories)
 
 
 if __name__ == '__main__':
-    target = [100, 100]
-    x0 = np.array([0, 0, 0, 0, 0, 0]).reshape(-1, 1)
-    state_dim = 6
+    target = [-100, -100, 100, 100]
+    state_dim = 8
     state_noise_covariance = np.eye(state_dim)
     dynamics_params = {
         "state_dim": state_dim,
         "dt": 0.005,
         "force_time_constant": 0.040,  # 40ms, exponential filter constant
         "mass": 1,
-        "state_noise_magnitude": 1,
+        "state_noise_magnitude": .0001,
         "state_noise_covariance": state_noise_covariance
     }
-
     cost_params = {
         "dt": 0.005,
-        "control_cost_magnitude": .1,
-        "velocity_cost_amplitude": 0.01,
-        "force_cost_amplitude": 0.01,
+        "control_cost_magnitude": 1,
+        "velocity_cost_amplitude": 0.05,
+        "force_cost_amplitude": 0.05,
         "target": np.array(target)
     }
 
-    num_movements = 25
-    num_steps = 100
-    state_space = 500
+    num_movements = 10
+    num_steps = 250
+    state_space = 1000
 
     perturbation = np.zeros((state_dim, num_steps))
-    perturbation[4, 10:50] = 500
+    # perturbation[4, 10:50] = 500
 
-    lqr = LQR(dynamics_params, cost_params)
+    lqr1 = LQR(dynamics_params, cost_params)
 
-    trajectories = []
-    for i in range(num_movements):
-        x0 = np.array([
-            np.random.uniform(-state_space // 2, state_space // 2),
-            np.random.uniform(-state_space // 2, state_space // 2), 0, 0, 0, 0
-        ]).reshape(-1, 1)
-        states, controls = lqr.sample_trajectory(x0, num_steps, perturbation)
-        trajectories.append(states)
+    # lqr = LQR(dynamics_params, cost_params)
+    # lqr.A[:-2, :-2] += 0.001 * np.random.normal(size=lqr.A[:-2, :-2].shape)
+    # trajectories_noise = sample_trajectories(lqr,
+    #                                          num_steps,
+    #                                          perturbation=perturbation)
 
-    # figax = plot_eigenvalues(A - B @ K)
-    # figax = plot_eigenvalues(A)
+    # The closed-loop state transfer matrix is stable
+    # if and only if all of its eigenvalues are strictly
+    # inside the unit circle of the complex plane.
 
-    figax = visualize_control_law(lqr.S)
-    figax = visualize_control_law(lqr.K)
+    # figax = plot_eigenvalues((lqr.A - (lqr.B @ lqr.K)), "bar")
+    # figax = plot_eigenvalues(lqr.A, "bar")
+
+    # figax = visualize_control_law(lqr.S)
+    # figax = visualize_control_law(lqr.K)
 
     # fig, axes = plot_trajectory_pair(trajectories[:, :, :2],
-    #                                     ylabels=["x position", "y position"],
-    #                                     goal=cost_params["target"])
+    #                                  ylabels=["x position", "y position"],
+    #                                  goal=cost_params["target"])
     # fig, axes = plot_trajectory_pair(trajectories[:, :, 4:6],
-    #                                     ylabels=["x force", "y force"])
+    #                                  ylabels=["x force", "y force"])
 
-    lims = [-state_space // 2, state_space // 2]
-    figax = visualize_cost_field(lqr.S, lims)
-    fig, ax = visualize_control_field(lqr.K, lims)
-    for it in trajectories:
-        ax.plot(it[:, 0], it[:, 1], "k--", alpha=0.5)
-        figax[1].plot(it[:, 0], it[:, 1], "k--", alpha=0.5)
-        ax.plot(it[0, 0], it[0, 1], "og")
-        ax.plot(it[-1, 0], it[-1, 1], "or")
-        figax[1].plot(it[0, 0], it[0, 1], "og")
-        figax[1].plot(it[-1, 0], it[-1, 1], "or")
-    figax[1].plot(cost_params["target"][0], cost_params["target"][1], "*w")
+    # figax = visualize_cost_field(lqr.S)
+
+    # fig, ax = visualize_control_field(lqr.K, lims)
+
+
+    def plot_trajectories(trajectories, target=None, ax=None):
+        if ax is None:
+            fig, ax = plt.subplots(1, 1, figsize=(10, 10))
+        for it in trajectories:
+            ax.plot(it[:, 0], it[:, 1], "k--", alpha=0.5)
+            ax.plot(it[0, 0], it[0, 1], "og")
+            ax.plot(it[-1, 0], it[-1, 1], "or")
+        if target is not None:
+            ax.plot(target[0], target[1], "*w", markerSize=5)
+        return ax
+
+    ax = visualize_cost_field(lqr1.S)
+    ax = visualize_control_field(lqr1.K)
+    # plot_trajectories(trajectories_plain, target=target, ax=ax)
+    # ax = visualize_cost_field(lqr.S, lims)
+    # plot_trajectories(trajectories_perturbed, target=target, ax=ax)
+    # ax = visualize_cost_field(lqr.S, lims)
+    # plot_trajectories(trajectories_noise, target=target, ax=ax)
     plt.show()

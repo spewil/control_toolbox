@@ -228,3 +228,460 @@
 2021-02-18T19:16:48.070098+0000 - __main__ - INFO - Converged in 45 steps.
 2021-02-18T19:18:56.149076+0000 - __main__ - INFO - Converged in 45 steps.
 2021-02-18T19:19:11.610048+0000 - __main__ - INFO - Converged in 45 steps.
+2021-02-18T20:24:51.209440+0000 - __main__ - INFO - Converged in 45 steps.
+2021-02-18T20:27:16.868000+0000 - __main__ - INFO - Converged in 45 steps.
+2021-02-18T20:27:45.105059+0000 - __main__ - INFO - Converged in 45 steps.
+2021-02-18T20:28:40.363956+0000 - __main__ - INFO - Converged in 45 steps.
+2021-02-18T20:29:33.944029+0000 - __main__ - INFO - Converged in 45 steps.
+2021-02-18T20:30:40.103320+0000 - __main__ - INFO - Converged in 45 steps.
+2021-02-18T20:31:19.500890+0000 - __main__ - INFO - Converged in 46 steps.
+2021-02-18T20:32:54.314943+0000 - __main__ - INFO - Converged in 46 steps.
+2021-02-18T20:33:53.354380+0000 - __main__ - INFO - Converged in 25 steps.
+2021-02-18T20:36:19.986066+0000 - __main__ - INFO - Converged in 25 steps.
+2021-02-18T20:37:20.416836+0000 - __main__ - INFO - Converged in 49 steps.
+2021-02-18T20:38:27.552286+0000 - __main__ - INFO - Converged in 49 steps.
+2021-02-18T23:24:07.054347+0000 - __main__ - INFO - Converged in 1 steps.
+2021-02-18T23:24:54.102224+0000 - __main__ - INFO - Converged in 1 steps.
+2021-02-18T23:26:10.803139+0000 - __main__ - INFO - Converged in 1 steps.
+2021-02-18T23:26:34.790932+0000 - __main__ - INFO - Converged in 1 steps.
+2021-02-18T23:27:07.923881+0000 - __main__ - INFO - Converged in 1 steps.
+2021-02-18T23:28:35.429320+0000 - __main__ - INFO - Converged in 1 steps.
+2021-02-18T23:38:14.103721+0000 - __main__ - INFO - Converged in 53 steps.
+2021-02-18T23:40:46.032907+0000 - __main__ - INFO - Converged in 1 steps.
+2021-02-18T23:43:10.846015+0000 - __main__ - INFO - Converged in 99 steps.
+2021-02-18T23:44:21.726989+0000 - __main__ - INFO - Converged in 305 steps.
+2021-02-18T23:47:35.484009+0000 - __main__ - INFO - Converged in 331 steps.
+2021-02-18T23:48:24.240603+0000 - __main__ - INFO - Converged in 433 steps.
+2021-02-18T23:48:53.103750+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:33:06.808712+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:33:06.884616+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:39:40.415652+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:39:40.465180+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:40:02.970056+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:40:03.024017+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:41:52.471128+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:41:52.531378+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:42:12.472222+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:42:12.537504+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:45:40.143404+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:45:40.205188+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:46:56.821150+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:46:56.883319+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:49:19.926687+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:49:19.999243+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:50:30.427421+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:50:30.480872+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:50:52.540759+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:50:52.607941+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:51:09.134436+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:51:09.191752+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T11:51:42.526658+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T12:18:15.345864+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T12:41:33.381530+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T12:50:21.159230+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T12:50:21.267237+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T12:50:45.132826+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T12:50:45.326579+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T12:51:55.791868+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T12:51:55.940347+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T13:11:24.026225+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T13:11:24.188911+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T13:41:34.471704+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T13:41:34.531957+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T13:42:33.344025+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T13:42:40.001490+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T13:48:16.257417+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T13:48:54.140921+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T13:49:19.624807+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T13:50:01.557358+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T13:51:59.252690+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T14:06:34.486512+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T14:06:41.347201+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T14:09:34.051847+0000 - __main__ - ERROR - Exceeded steady stay computation recursion.
+2021-02-19T14:12:01.815158+0000 - __main__ - ERROR - Exceeded steady stay computation recursion.
+2021-02-19T14:12:58.108373+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.781050+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.782128+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.782635+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.783204+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.783691+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.784216+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.788064+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.788404+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.788702+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.798771+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.799169+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.799476+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.809094+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.809676+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.810285+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.816239+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.816872+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.817379+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.831802+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.832258+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.832608+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.838780+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.839671+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.840290+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.853178+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.855287+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.855779+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.859903+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.860754+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.866103+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.866505+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.874739+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.875124+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.875720+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.885504+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.887798+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.888215+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.897671+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.898038+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.898395+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.908563+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.909721+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.910059+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.921980+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.922545+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.923055+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.932254+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.932806+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.933169+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.948382+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.948801+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.949147+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.955217+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.955742+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.956313+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.972463+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.972899+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.973232+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.973742+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.979504+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.980139+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.980666+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:18.999631+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.000058+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.000369+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.009042+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.009493+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.009905+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.025370+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.025755+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.026503+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.033197+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.033811+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.034355+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.051279+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.051649+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.052218+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.058983+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.059577+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.060095+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.077805+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.078361+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.078939+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.084852+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.085581+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.086262+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.086792+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.105656+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.106046+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.106386+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.123852+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.126078+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.134744+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.222116+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.224762+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.225278+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.257383+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.257849+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.258259+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.274949+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.275518+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.276134+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.318069+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.318519+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.318946+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.356769+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.357355+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.357787+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.371715+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.372163+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.372488+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.379088+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.379680+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.380232+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.381373+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.396003+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.397524+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.398521+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.406376+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.407183+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.407916+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.421983+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.422396+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.423196+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.433588+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.434022+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.434331+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.447153+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.447947+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.448652+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.455466+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.456017+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.457337+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.472582+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.473020+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.473362+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.481555+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.482261+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.483604+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.498385+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.498761+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.499132+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.499655+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.509284+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.509894+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.510387+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.526568+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.527007+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.528507+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.538958+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.539866+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.541248+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.547574+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.547965+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.548429+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.556561+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.557996+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.558869+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.574813+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.575366+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.575828+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.582433+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.582995+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.584381+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.605540+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.606099+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.607289+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.622965+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.626679+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.627325+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.629715+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.643144+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.644520+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.646634+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.661112+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.666319+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.667004+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.673249+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.674076+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.674624+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.687787+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.688449+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.691657+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.695654+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.696856+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.697258+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.707373+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.707849+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.708211+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.718410+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.718913+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.719337+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.719740+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.720251+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.721995+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.722392+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.722735+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.723055+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.730342+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.731532+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.732439+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.746436+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.747756+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.748161+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.756854+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.757342+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.757673+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.770220+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.771579+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.772179+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.772707+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.773104+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.777971+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.778776+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.779325+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.794454+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.795068+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.796200+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.804963+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.805708+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.806357+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.813902+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.814278+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.814610+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.822791+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.823256+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.824246+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.832924+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.833326+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.833629+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.840171+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.840737+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.841245+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.857228+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.857771+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.858194+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.858633+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.866286+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.866920+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.867535+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.878865+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.879234+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.879535+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.884081+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.884844+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.885438+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.900695+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.901120+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.901868+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.909588+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.910242+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.911031+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.927245+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.927629+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.928127+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.955689+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.956828+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.958952+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.966762+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.967174+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.967552+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.967854+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.968142+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.971018+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.971376+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:19.971692+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.004525+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.005247+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.005817+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.006325+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.007765+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.023655+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.024092+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.024633+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.031843+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.032440+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.032976+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.048381+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.048748+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.049286+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.078203+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.078886+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.079405+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.091562+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.091938+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.092425+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.106349+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.106922+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.107288+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.124067+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.124937+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.125250+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.131643+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.133830+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.134624+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.134996+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.150148+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.150523+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.150825+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.158167+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.158788+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.159312+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.171117+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.172017+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.172461+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.178361+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.179190+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.181466+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.192365+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:13:20.192817+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:17:09.978289+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:17:44.295888+0000 - __main__ - INFO - Converged in 588 steps.
+2021-02-19T14:17:56.978003+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T14:22:27.996722+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T14:27:21.725612+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T14:38:52.023567+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T14:40:04.748832+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T14:40:29.675427+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T14:41:31.793851+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T14:45:45.001117+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T14:45:56.661169+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T14:46:39.805488+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T14:48:18.786203+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T14:50:23.330969+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T14:50:45.613006+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T15:01:39.561935+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T15:02:00.757858+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T15:04:06.974054+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T15:04:28.717459+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T15:16:26.801365+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T15:16:53.725594+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T15:19:05.691094+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T15:19:58.802678+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T15:20:17.804317+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T15:22:21.271332+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T15:25:35.571730+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T15:25:45.542188+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T15:26:18.473257+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T15:26:52.629432+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T15:27:15.803582+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T15:32:49.063948+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T15:34:44.431788+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T15:34:58.050370+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T15:36:27.638784+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T15:36:46.368862+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T15:37:01.506843+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T15:39:24.788793+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T15:39:36.057936+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T15:54:45.165060+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T15:56:17.894025+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T15:56:57.455014+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T15:59:30.449634+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T16:34:34.476845+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T16:35:56.748411+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T16:36:18.967405+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T16:38:00.205626+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T16:38:40.968823+0000 - __main__ - ERROR - Exceeded maximum number of steady state computation iterations.
+2021-02-19T16:40:38.193213+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T16:41:18.825790+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T16:45:34.667898+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T16:46:04.670331+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T16:48:02.552374+0000 - __main__ - INFO - Converged in 765 steps.
+2021-02-19T16:49:43.206617+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T16:49:43.268474+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T16:53:55.570510+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T16:53:55.638660+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T16:54:08.328361+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T16:54:08.429788+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T17:01:55.387498+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T17:01:55.479089+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T17:12:02.298308+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T17:12:02.370149+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T17:12:42.163680+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T17:12:42.229541+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T17:15:03.015743+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T17:15:03.098190+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T17:15:37.001019+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T17:15:37.069179+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T17:19:25.350061+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T17:19:25.423204+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T17:22:36.575042+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T17:22:36.638901+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T17:31:44.365711+0000 - __main__ - INFO - Converged in 767 steps.
+2021-02-19T17:32:50.705459+0000 - __main__ - INFO - Converged in 681 steps.
+2021-02-19T18:05:22.387308+0000 - __main__ - INFO - Converged in 767 steps.
