@@ -96,7 +96,7 @@ def full(A, B, K, n, v, w):
     for k in range(1, n + 1):
         x = matrix_power(M, k - 1).T @ ((Mn @ v[:, None]) - w[:, None])
         y = matrix_power(M, n - k) @ v[:, None]
-        g = g + 2 * (x.T @ y)
+        g = g + 2 * np.outer(x, y)
     return f, g
 
 
@@ -105,15 +105,13 @@ def check_full_gradient(A, B, K, n, v, w):
     # f(x + t * delta) - f(x - t * delta) / (2t)
     # should be roughly equal to inner product <g, delta>
     t = 1E-6
-    # delta = np.random.randn(*A.shape)
-    f1, _ = full(A + t, B, K, n, v, w)
-    f2, _ = full(A - t, B, K, n, v, w)
+    delta = np.random.randn(*A.shape)
+    f1, _ = full(A + t * delta, B, K, n, v, w)
+    f2, _ = full(A - t * delta, B, K, n, v, w)
     f, g = full(A, B, K, n, v, w)
     ng = (f1 - f2) / (2 * t)
-    print(ng)
-    print(g)
     print('full approximation error',
-          (f1 - f2) / (2 * t) - np.sum(g))  #np.tensordot(g, delta))
+          (f1 - f2) / (2 * t) - np.tensordot(g, delta))
 
 
 def generateRandomData():
@@ -128,9 +126,8 @@ def generateRandomData():
 
 if __name__ == '__main__':
     A, B, K, n, v, w = generateRandomData()
-    # check_elementwise_gradient(A, B, K, n, v, w)
-    # check_scalar_gradient(A, B, K, n, v, w)
+    check_elementwise_gradient(A, B, K, n, v, w)
+    check_scalar_gradient(A, B, K, n, v, w)
     check_full_gradient(A, B, K, n, v, w)
     # is the scalar derivative the trace of the full?
-    f, g = scalar(A, B, K, n, v, w)
-    f, g = full(A, B, K, n, v, w)
+    # f, g = full(A, B, K, n, v, w)

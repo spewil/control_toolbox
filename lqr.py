@@ -17,6 +17,10 @@ class LQR():
         self.S = self.compute_steady_state_cost_to_go()
         self.K = self.compute_control_law()
 
+    def reoptimize(self):
+        self.S = self.compute_steady_state_cost_to_go()
+        self.K = self.compute_control_law()
+
     def compute_dynamics(self):
         """
         Args:
@@ -82,12 +86,12 @@ class LQR():
         times = np.linspace(0, T, int(T / dt))
 
         # state cost x^TQx = (x^TD^T)(Dx)
-        D_target = np.array([[-1, 0, 0, 0, 0, 0, target[0], 0],\
-                             [ 0,-1, 0, 0, 0, 0, 0, target[1]]])
-        # [0,  0, velocity_cost_amplitude, 0,  0,  0, 0,0],\
-        # [0,  0, 0,  velocity_cost_amplitude, 0,  0, 0,0],\
-        # [0,  0, 0,  0,  force_cost_amplitude, 0, 0  ,0],\
-        # [0,  0, 0,  0,  0,  force_cost_amplitude, 0,0]])
+        D_target = np.array([[-1, 0, 0, 0, 0, 0, target[0], 0],
+                             [0, -1, 0, 0, 0, 0, 0, target[1]],
+                             [0, 0, velocity_cost_amplitude, 0, 0, 0, 0, 0],
+                             [0, 0, 0, velocity_cost_amplitude, 0, 0, 0, 0],
+                             [0, 0, 0, 0, force_cost_amplitude, 0, 0, 0],
+                             [0, 0, 0, 0, 0, force_cost_amplitude, 0, 0]])
 
         Q = D_target.T @ D_target
 
@@ -102,7 +106,7 @@ class LQR():
         R = self.R
         Q = self.Q
         i = 0
-        tol = 0.00001
+        tol = 1E-7
         old_S = Q
         while True:
             i += 1

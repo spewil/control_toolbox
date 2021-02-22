@@ -24,7 +24,7 @@ def plot_trajectories(trajectories, target=None, ax=None):
         ax.plot(it[0, 0], it[0, 1], "og")
         ax.plot(it[-1, 0], it[-1, 1], "or")
     if target is not None:
-        ax.plot(target[0], target[1], "*w", markerSize=5)
+        ax.plot(target[0], target[1], "*k", markerSize=20)
     return ax
 
 
