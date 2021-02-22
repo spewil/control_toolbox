@@ -124,10 +124,11 @@ def generateRandomData():
     return A, B, K, n, v, w
 
 
-if __name__ == '__main__':
-    A, B, K, n, v, w = generateRandomData()
-    check_elementwise_gradient(A, B, K, n, v, w)
-    check_scalar_gradient(A, B, K, n, v, w)
-    check_full_gradient(A, B, K, n, v, w)
-    # is the scalar derivative the trace of the full?
-    # f, g = full(A, B, K, n, v, w)
+# if __name__ == '__main__':
+# A, B, K, n, v, w = generateRandomData()
+# check_elementwise_gradient(A, B, K, n, v, w)
+# check_scalar_gradient(A, B, K, n, v, w)
+# check_full_gradient(A, B, K, n, v, w)
+# is the scalar derivative the trace of the full?
+# f, g = scalar(A, B, K, n, v, w)
+# f, g = full(A, B, K, n, v, w)

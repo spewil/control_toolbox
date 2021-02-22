@@ -2,6 +2,8 @@ import matplotlib
 matplotlib.use("TkAgg")
 from matplotlib import pyplot as plt
 import numpy as np
+import matplotlib.cm as cm
+plt.style.use('ggplot')
 
 
 def plot_trajectory_pair(trajectories, ylabels, goal=None):
@@ -16,15 +18,31 @@ def plot_trajectory_pair(trajectories, ylabels, goal=None):
     return fig, axes
 
 
-def plot_trajectories(trajectories, target=None, ax=None):
+def plot_trajectories(trajectories, target=None, ax=None, cmap=None):
+    num_t = trajectories.shape[0]
     if ax is None:
         fig, ax = plt.subplots(1, 1, figsize=(10, 10))
-    for it in trajectories:
-        ax.plot(it[:, 0], it[:, 1], "k--", alpha=0.5)
-        ax.plot(it[0, 0], it[0, 1], "og")
-        ax.plot(it[-1, 0], it[-1, 1], "or")
+    if cmap is not None:
+        c_ax = fig.add_axes([0.8, .25, 0.05, 0.5])
+        cmap = cm.get_cmap(cmap)
+        colors = cmap(np.linspace(0, 1, num_t))
+        matplotlib.colorbar.ColorbarBase(ax=c_ax,
+                                         ticks=range(1, num_t + 1),
+                                         label='Gradient Descent Iterations',
+                                         values=range(1, num_t + 1))
+    alphas = np.linspace(0.25, 1, num_t, endpoint=True)
+    for i, it in enumerate(trajectories):
+        ax.plot(it[:, 0], it[:, 1], "k--", alpha=alphas[i])
+        ax.plot(it[0, 0], it[0, 1], "or")
+        if cmap is not None:
+            ax.plot(it[-1, 0], it[-1, 1], "o", color=colors[i])
+        else:
+            ax.plot(it[-1, 0], it[-1, 1], "og")
     if target is not None:
-        ax.plot(target[0], target[1], "*k", markerSize=20)
+        ax.plot(target[0], target[1], "*k", markerSize=20, label="Goal state")
+    ax.legend(loc="upper left")
+    ax.set_xlabel("$x$ position")
+    ax.set_ylabel("$y$ position")
     return ax
 
 

@@ -112,8 +112,8 @@ class LQR():
             i += 1
             if i > 5000:
                 logger.error(
-                    "Exceeded maximum number of steady state computation iterations."
-                )
+                    "Exceeded maximum number of steady state computation iterations {i}.",
+                    i=i)
                 break
             S = self.backward_recurse(old_S)
             if np.max(np.abs(old_S - S)) < tol:
